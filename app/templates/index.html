@@ -1,5 +1,48 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<!-- banner -->
+<section id="body" class="py-5 h-100">
+    <div class="h-100 banner position-relative pt-5">
+        <img src="{{url_for('static', filename='images/banner-image.png')}}" alt="" class="banner-image img-fluid h-100">
+        <div class="overlay position-absolute top-0 bottom-0 end-0 start-0">
+            <div class="position-absolute quote-details pe-4">
+                <div class="row text-white align-items-center">
+                    <span class="quotation-mark text-white h1"> “ </span>
+                    <div class="col-sm-8">
+                        <h1 class="fw-bold mb-3 mb-sm-0">
+                            If debugging is the process of removing software bugs, then programming must be the
+                            process of putting them in.
+                        </h1>
+                        <div class="fs-6 text-sm-end">
+                            - james
+                        </div>
+                    </div>
+                    <div class="col-sm-4 text-sm-end mt-4 mt-sm-0">
+                        <button class="btn border-white px-4 py-2 text-white rounded-pill">
+                            Learn more
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end banner -->
+<!-- categories -->
+<section class="py-5 categories">
+    <h1 class="text-center text-white pb-3">Categories</h1>
+    <div class="row">
+        {% for i in range(4) %}
+        <div class="col-sm-6 mb-3">
+           {% include 'partials/category-card.html' %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<!-- end categories -->
+<!-- newsletter -->
+<!-- end newsletter -->
+<!-- blogs -->
+<!-- end blogs -->
 {% endblock %}
