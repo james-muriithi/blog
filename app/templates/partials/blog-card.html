@@ -1,5 +1,5 @@
 <div class="blog-card">
-    <img src="./images/banner-image.png" alt="" class="img-fluid news-image w-100">
+    <img src="{{url_for('static', filename='images/banner-image.png')}}" alt="" class="img-fluid news-image w-100">
     <div class="details  pt-3">
         <p class="text-muted mb-1">
             Technology . <span class="ps-3">Jun 28,2021</span>
@@ -14,7 +14,7 @@
             Etiam vestibulum. Nostra netus per conubia dolor.
         </p>
         <div class="d-flex">
-            <img src="./images/banner-image.png" height="30" width="30" alt="" class="avatar rounded-circle">
+            <img src="{{url_for('static', filename='images/banner-image.png')}}" height="30" width="30" alt="" class="avatar rounded-circle">
             <div class="ps-3">
                 <p class="text-white mb-1">Jane Doe</p>
                 <span class="text-muted"></span>

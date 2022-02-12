@@ -42,7 +42,17 @@
 </section>
 <!-- end categories -->
 <!-- newsletter -->
+{% include 'partials/newsletter.html' %}
 <!-- end newsletter -->
 <!-- blogs -->
+<section class="py-5 blogs-section">
+    <div class="row">
+        {% for i in range(6) %}
+        <div class="col-sm-4 mb-3">
+           {% include 'partials/blog-card.html' %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
 <!-- end blogs -->
 {% endblock %}
