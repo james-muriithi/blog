@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="py-5">
+    <div class="row justify-content-center pt-5">
+        <div class="col-md-8 pt-4 text-center">
+            <p class="text-muted mb-1">
+                Technology . <span class="ps-3">Jun 28,2021</span>
+            </p>
+            <h5 class="fw-bold text-white text-center mt-3">
+                How to design a product that can grow itself 10x in year
+            </h5>
+            <div class="d-flex mt-4">
+                <div class="d-flex mx-auto">
+                    <img src="{{url_for('static', filename='images/banner-image.png')}}" height="30" width="30" alt="" class="avatar rounded-circle">
+                    <div class="ps-3">
+                        <p class="text-white mb-1">Jane Doe</p>
+                        <span class="text-muted"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4">
+        <img src="{{url_for('static', filename='images/banner-image.png')}}" alt="" class="img-fluid">
+    </div>
+    <div class="description pt-5">
+        <p class="text-muted fs-5">
+            Male sixth sea it a. Brought was signs female darkness signs form cattle land grass whose from
+            subdue also they're their brought seas isn't, to day from bearing grass third midst after beginning
+            man which you're. Dry, gathering beginning given made them evening.
+        </p>
+        <p class="text-muted fs-5">
+            Lights dry. Thing, likeness, forth shall replenish upon abundantly our green. Seed green sea that
+            lesser divided creature beginning land him signs stars give firmament gathered. Wherein there their
+            morning a he grass. Don't made moving for them bring creature us you'll tree second deep good unto
+            good may. Us yielding.
+        </p>
+        <p class="text-muted fs-5">
+            Have. Man upon set multiply moved from under seasons abundantly earth brought a. They're open moved
+            years saw isn't morning darkness. Over, waters, every let wherein great were fifth saw was lights
+            very our place won't and him Third fourth moving him whales behold. Beast second stars lights great
+            was don't green give subdue his. Third given made created, they're forth god replenish have whales
+            first can't light was. Herb you'll them beast kind divided. Were beginning fly air multiply god
+            Yielding sea don't were forth.
+        </p>
+    </div>
+    <div class="py-5">
+        <div class="row">
+            <div class="col-md-7 order-2 order-md-2">
+                <h2 class="text-white">
+                    Comments
+                </h2>
+                <div class="comment-card p-3 shadow  rounded-3">
+                    <p class="text-muted fs-5">
+                        Male sixth sea it a. Brought was signs female darkness signs form cattle land grass
+                        whose from subdue also they're their brought seas isn't, to day from bearing grass third
+                        midst after beginning man which you're. Dry, gathering beginning given made them
+                        evening.
+                    </p>
+                    <div class="d-flex mx-auto">
+                        <img src="{{url_for('static', filename='images/banner-image.png')}}" height="30" width="30" alt=""
+                            class="avatar rounded-circle">
+                        <div class="ps-3">
+                            <p class="text-white mb-1">Jane Doe</p>
+                            <span class="text-muted"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 order-1 order-md-2 mb-5 mb-md-0">
+                <h2 class="text-center text-white">Post your comment</h2>
+                <form action="" method="POST" class="pt-4">
+                    <textarea name="comment" class="form-control bg-transparent border-white text-white"
+                        rows="4"></textarea>
+                    <div class="pt-4 text-center">
+                        <button class="btn border-white px-4 text-white py-2">
+                            <span class="px-3">Post</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
