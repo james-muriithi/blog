@@ -17,15 +17,14 @@ def index():
 
         flash('Invalid username or Password', 'danger')
 
-    return render_template('login.html', form=form)
+    return render_template('auth/login.html', form=form, title="Login")
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignupForm()
     if form.validate_on_submit():
-        user = User(email=form.email.data, username=form.username.data,
-                    password=form.password.data, name=form.name.data)
+        user = User(email=form.email.data, password=form.password.data, name=form.name.data)
         db.session.add(user)
         db.session.commit()
 
@@ -34,7 +33,7 @@ def signup():
         login_user(user)
         return redirect(request.args.get('next') or url_for('main.index'))
 
-    return render_template('signup.html', form=form)
+    return render_template('auth/signup.html', form=form)
 
 
 @auth.route('/logout')
