@@ -11,17 +11,16 @@
                     <span class="quotation-mark text-white h1"> “ </span>
                     <div class="col-sm-8">
                         <h1 class="fw-bold mb-3 mb-sm-0">
-                            If debugging is the process of removing software bugs, then programming must be the
-                            process of putting them in.
+                            {{quote.quote}}
                         </h1>
                         <div class="fs-6 text-sm-end">
-                            - james
+                            - {{quote.author}}
                         </div>
                     </div>
                     <div class="col-sm-4 text-sm-end mt-4 mt-sm-0">
-                        <button class="btn border-white px-4 py-2 text-white rounded-pill">
-                            Learn more
-                        </button>
+                        <a href="#blogs" class="btn border-white px-4 py-2 text-white rounded-pill">
+                            View blogs
+                        </a>
                     </div>
                 </div>
             </div>
@@ -45,7 +44,7 @@
 {% include 'partials/newsletter.html' %}
 <!-- end newsletter -->
 <!-- blogs -->
-<section class="py-5 blogs-section">
+<section id="blogs" class="py-5 blogs-section">
     <div class="row">
         {% for blog in blogs %}
         <div class="col-sm-4 mb-3">

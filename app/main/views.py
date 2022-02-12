@@ -1,6 +1,7 @@
 from app.main.forms import BlogForm, CommentForm, SubscriberForm
 from app.models import Blog, Subscriber, Comment
 from app import db, photos
+from app.requests import get_quote
 from flask import render_template, redirect, url_for, request, flash, abort
 from flask_login import login_required, current_user
 from . import main
@@ -8,8 +9,9 @@ from . import main
 @main.route('/')
 def index():
     subscribe_form = SubscriberForm()
+    quote = get_quote()
     blogs = Blog.get_all_blogs()
-    return render_template('index.html', blogs=blogs, subscribe_form=subscribe_form)
+    return render_template('index.html', blogs=blogs, subscribe_form=subscribe_form, quote=quote)
 
 
 @main.route('/blog/<id>')
