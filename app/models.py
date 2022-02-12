@@ -52,6 +52,10 @@ class User(UserMixin, db.Model):
         db.session.add(self)
         db.session.commit()
 
+    def get_all_blogs(self):
+        return self.blogs.order_by(Blog.created_at.desc()).all()  
+
+
     def verify_password(self,password):
         return check_password_hash(self.password_hash,password)
 
@@ -128,6 +132,12 @@ class Comment(db.Model):
         comment = Comment.query.filter_by(id=id).first()
         db.session.delete(comment)
         db.session.commit()
+
+    # get all comments created by other users on my posts only 
+    @classmethod
+    def get_my_posts_comments(cls, user_id):
+        comments = Comment.query.filter(Comment.blog.has(user_id=user_id))
+        return comments    
 
 class Role(db.Model):
     '''

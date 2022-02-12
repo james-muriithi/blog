@@ -1,6 +1,6 @@
 from app.models import Subscriber
 from flask_wtf import FlaskForm
-from wtforms import TextAreaField, StringField, IntegerField
+from wtforms import TextAreaField, StringField, IntegerField, EmailField
 from wtforms.validators import InputRequired, ValidationError
 from flask import flash
 
@@ -24,3 +24,9 @@ class SubscriberForm(FlaskForm):
             if Subscriber.query.filter_by(email = data_field.data).first():
                 flash('Email already subscribed', 'error')
                 raise ValidationError('Email already subscribed')
+
+class ProfileForm(FlaskForm):
+    """Profile form"""
+    email = EmailField('Email',validators=[InputRequired()])
+    name = StringField('Name',validators=[InputRequired()])
+    about = TextAreaField('About')

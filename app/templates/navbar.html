@@ -46,7 +46,7 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end bg-primary" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item bg-primary text-white" href="{{url_for('main.index')}}">Profile</a>
+                        <a class="dropdown-item bg-primary text-white" href="{{url_for('main.profile')}}">Profile</a>
                         {% if current_user.is_admin %}
                         <a class="dropdown-item bg-primary text-white"
                             href="{{url_for('main.index')}}">Dashboard</a>

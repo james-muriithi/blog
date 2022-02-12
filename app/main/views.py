@@ -1,5 +1,5 @@
-from app.main.forms import BlogForm, CommentForm, SubscriberForm
-from app.models import Blog, Subscriber, Comment
+from app.main.forms import BlogForm, CommentForm, ProfileForm, SubscriberForm
+from app.models import Blog, Subscriber, Comment, User
 from app import db, photos
 from app.requests import get_quote
 from flask import render_template, redirect, url_for, request, flash, abort
@@ -77,3 +77,29 @@ def save_comment(id):
         flash("Your comment was saved successfully", "success")
 
     return redirect(request.referrer or url_for('main.index'))     
+
+@main.route('/profile', methods=["GET","POST"])
+@login_required
+def profile():
+    profile_form = ProfileForm()
+    if profile_form.validate_on_submit():
+        User.query.filter_by(id=current_user.id).update({
+            'name':profile_form.name.data, 'about': profile_form.about.data
+            })
+        db.session.commit()
+        flash("Your details have been updated", "success")
+        return redirect(url_for('main.profile'))
+
+    return render_template('profile.html', form=profile_form, Comment = Comment)    
+
+
+@main.route('/profile/update_avatar',methods= ['POST'])
+@login_required
+def update_avatar():
+    if 'avatar' in request.files:
+        filename = photos.save(request.files['avatar'])
+        path = f'uploads/{filename}'
+        current_user.avatar = path
+        db.session.commit()
+
+    return redirect(url_for('main.profile'))    
