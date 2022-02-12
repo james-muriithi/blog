@@ -8,6 +8,8 @@ class Config:
     DB_USER = config('DB_USER', default="")
     DB_PASSWORD = config('DB_PASSWORD', default="")
     DB = 'blogs'
+
+    UPLOADED_PHOTOS_DEST ='app/static/uploads'
     
     SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@localhost/{DB}'
 

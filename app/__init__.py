@@ -5,6 +5,7 @@ from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_toastr import Toastr
+from flask_uploads import UploadSet,configure_uploads, IMAGES
 
 toastr = Toastr()
 mail = Mail()
@@ -13,6 +14,7 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.index'
+photos = UploadSet('photos',IMAGES)
 
 def create_app(config_name):
 
@@ -34,6 +36,8 @@ def create_app(config_name):
     mail.init_app(app)
     toastr.init_app(app)
 
+    # configure UploadSet
+    configure_uploads(app,photos)
 
     # Will add the views and forms
 

@@ -21,6 +21,7 @@
         {% endblock %}
 
         {% include "footer.html" %}
+        {% include "partials/add-blog.html" %}
     </div>
 
     <!-- scripts section -->
@@ -33,6 +34,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- ckeditor -->
+    <script src="//cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
     <script src="{{url_for('static', filename='js/scripts.js')}}"></script>
     {{ toastr.message() }}
     

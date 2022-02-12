@@ -78,6 +78,10 @@ class Category(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     blogs = db.relationship('Blog', backref='category', lazy='dynamic')
 
+    @classmethod
+    def get_all_categories(cls):
+        return cls.query.all()
+
     def __repr__(self):
         return f'Category {self.name}'
 
