@@ -21,6 +21,7 @@ class User(UserMixin, db.Model):
     avatar = db.Column(db.String(64))
 
     blogs = db.relationship('Blog', backref="user", lazy="dynamic")
+    comments = db.relationship('Comment', backref="user", lazy="dynamic")
 
     created_at = db.Column(db.DateTime, index=True, default=datetime.now)
 
@@ -74,7 +75,7 @@ class Blog(db.Model):
     image_path = db.Column(db.String())
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    comments = db.relationship('Comment', backref='post', lazy='dynamic')
+    comments = db.relationship('Comment', backref='blog', lazy='dynamic')
 
     @property
     def formatted_time(self):
@@ -116,10 +117,10 @@ class Comment(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    @classmethod
-    def get_comments(cls):
-        comments = Comment.query.all()
-        return comments
+    @property
+    def formatted_time(self):
+        from datetime import datetime
+        return self.created_at.strftime("%b %d, %Y")    
 
      # delete comment
     @classmethod

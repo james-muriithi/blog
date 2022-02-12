@@ -24,8 +24,3 @@ class SubscriberForm(FlaskForm):
             if Subscriber.query.filter_by(email = data_field.data).first():
                 flash('Email already subscribed', 'error')
                 raise ValidationError('Email already subscribed')
-
-
-# category form
-class CategoryForm(FlaskForm):
-    name = StringField('Category', validators=[InputRequired()])

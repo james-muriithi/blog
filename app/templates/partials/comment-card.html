@@ -1,0 +1,17 @@
+<div class="comment-card p-3 shadow  rounded-3 mb-3">
+    <p class="text-white fs-5">
+        {{comment.comment}}
+    </p>
+    <div class="d-flex align-items-center">
+        <p class="date text-muted">
+            {{comment.formatted_time}}
+        </p>
+        <div class="d-flex ms-auto">
+            <img src="{{blog.user.avatar_image}}" height="30" width="30" alt="" class="avatar rounded-circle">
+            <div class="ps-3">
+                <p class="text-muted mb-1">{{blog.user.name}}</p>
+                <span class="text-muted"></span>
+            </div>
+        </div>
+    </div>
+</div>
