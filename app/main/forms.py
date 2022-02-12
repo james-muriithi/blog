@@ -10,6 +10,12 @@ class BlogForm(FlaskForm):
     content = StringField('Content', validators=[InputRequired()])
     image_path = StringField('Content', validators=[InputRequired()])
 
+class EditBlogForm(FlaskForm):
+    title = StringField('Title', validators=[InputRequired()])
+    category = IntegerField('Category', validators=[InputRequired()])
+    content = StringField('Content', validators=[InputRequired()])
+    image_path = StringField('Content')
+
 # comment form
 class CommentForm(FlaskForm):
     comment = TextAreaField('Leave a Comment', validators=[InputRequired()])

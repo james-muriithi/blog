@@ -81,11 +81,12 @@
                                     <thead>
                                         <tr class="">
                                             <th scope="col">#</th>
+                                            <th scope="col">Image</th>
                                             <th scope="col">Title</th>
                                             <th scope="col">Category</th>
                                             <th scope="col">Comments </th>
                                             <th scope="col">Created At</th>
-                                            <th scope="col">Actions</th>
+                                            <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -95,6 +96,17 @@
                                         <tr>
                                             <td>
                                                 {{loop.index}}
+                                            </td>
+                                            <td>
+                                                <img src="{{url_for('static', filename=blog.image_path)}}" alt=""
+                                                    height="30" width="40" class="img-fluid">
+                                                <button class="btn btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#editBlogImageModal-{{blog.id}}">
+                                                    <span class="material-icons text-white">
+                                                        edit
+                                                    </span>
+                                                </button>
+                                                {% include "partials/edit-blog-image.html" %}
                                             </td>
                                             <td>
                                                 <a href="{{url_for('main.blog_show', id=blog.id)}}"
@@ -112,16 +124,19 @@
                                             <td>{{blog.formatted_time}}</td>
                                             <td>
                                                 <div>
-                                                    <button class="btn btn-sm">
+                                                    <button class="btn btn-sm" data-bs-toggle="modal"
+                                                        data-bs-target="#editBlogModal-{{blog.id}}">
                                                         <span class="material-icons text-white">
                                                             edit
                                                         </span>
                                                     </button>
-                                                    <button class="btn btn-sm">
+                                                    <a href="{{url_for('main.delete_blog', id=blog.id)}}"
+                                                        class="btn btn-sm">
                                                         <span class="material-icons text-danger">
                                                             delete
                                                         </span>
-                                                    </button>
+                                                    </a>
+                                                    {% include "partials/edit-blog.html" %}
                                                 </div>
                                             </td>
                                         </tr>
@@ -155,7 +170,7 @@
                                             <th scope="col">Comment</th>
                                             <th scope="col">Comment by </th>
                                             <th scope="col">Created At</th>
-                                            <th scope="col">Actions</th>
+                                            <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -179,11 +194,12 @@
                                             <td>{{comment.formatted_time}}</td>
                                             <td>
                                                 <div>
-                                                    <button class="btn btn-sm">
+                                                    <a href="{{url_for('main.delete_comment', id=comment.id)}}"
+                                                        class="btn btn-sm">
                                                         <span class="material-icons text-danger">
                                                             delete
                                                         </span>
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>

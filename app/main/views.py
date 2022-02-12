@@ -1,4 +1,4 @@
-from app.main.forms import BlogForm, CommentForm, ProfileForm, SubscriberForm
+from app.main.forms import BlogForm, CommentForm, ProfileForm, SubscriberForm, EditBlogForm
 from app.models import Blog, Subscriber, Comment, User
 from app import db, photos
 from app.requests import get_quote
@@ -45,7 +45,42 @@ def blog_create():
         db.session.add(blog)
         db.session.commit()
 
-    return redirect(request.referrer or url_for('main.index'))   
+    return redirect(request.referrer or url_for('main.index'))  
+
+@main.route('/blog/<id>/update', methods=['POST'])
+@login_required
+def blog_update(id):
+    form = EditBlogForm()
+    blog = Blog.query.get(id)
+    if not blog:
+        abort(404)
+
+    if form.validate_on_submit():
+        Blog.query.filter_by(id=id).update({"title":form.title.data, "content":form.content.data, 
+            "category_id":form.category.data})
+        db.session.commit()
+        flash("Blog updated successfully", "success")
+
+    return redirect(request.referrer or url_for('main.index'))
+
+
+@main.route('/blog/<id>/update_image', methods=['POST'])
+@login_required
+def blog_update_image(id):
+    blog = Blog.query.get(id)
+    if not blog:
+        abort(404)
+
+    if 'image_path' in request.files:
+        filename = photos.save(request.files['image_path'])
+        path = f'uploads/{filename}'
+
+        Blog.query.filter_by(id=id).update({"image_path": path})
+        db.session.commit()
+        flash("Blog Image updated successfully", "success")
+
+    return redirect(request.referrer or url_for('main.index'))
+
 
 @main.route('/subscribe', methods=["POST"])
 def subscribe():
@@ -77,6 +112,32 @@ def save_comment(id):
         flash("Your comment was saved successfully", "success")
 
     return redirect(request.referrer or url_for('main.index'))     
+
+
+# delete blog
+@main.route("/blog/<id>/delete", methods=["GET"])
+@login_required
+def delete_blog(id):
+    blog = Blog.query.get(id)
+    if not blog or blog.user_id is not current_user.id:
+        abort(404)
+    
+    Blog.delete_blog(id) 
+
+    return redirect(request.referrer or url_for('main.index'))  
+
+
+#delete comment
+@main.route("/comment/<id>/delete", methods=["GET"])
+@login_required
+def delete_comment(id):
+    comment = Comment.query.get(id)
+    if not comment:
+        abort(404)
+    
+    Comment.delete_comment(id) 
+
+    return redirect(request.referrer or url_for('main.index'))  
 
 @main.route('/profile', methods=["GET","POST"])
 @login_required

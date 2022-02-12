@@ -90,6 +90,12 @@ class Blog(db.Model):
     def get_all_blogs(cls):
         return cls.query.order_by(cls.created_at.desc()).all()
 
+    @classmethod
+    def delete_blog(cls, id):
+        blog = Blog.query.filter_by(id=id).first()
+        db.session.delete(blog)
+        db.session.commit()
+
     def __repr__(self):
         return f'Post {self.title}'
 

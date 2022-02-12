@@ -1,0 +1,30 @@
+<!-- Modal -->
+<div class="modal fade" id="editBlogImageModal-{{blog.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Blog Image</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <form action="{{url_for('main.blog_update_image', id=blog.id)}}" method="POST" id="image-form-{{blog.id}}"
+                        enctype="multipart/form-data">
+                        {{ blog_form.csrf_token }}
+                        <img src="{{url_for('static', filename=blog.image_path)}}" class="img-fluid mt-4" height="50"
+                            width="50" alt="">
+                        <div class="form-group">
+                            <label for="" class="form-label text-sm">Image</label>
+                            <input type="file" class="form-control" name="image_path" required>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Close</button>
+                <button type="submit" form="image-form-{{blog.id}}" class="btn btn-primary px-4">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
