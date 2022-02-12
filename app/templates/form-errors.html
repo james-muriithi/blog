@@ -1,0 +1,10 @@
+{% if form.errors|length > 0 %}
+<div class="">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close btn-sm text-xs" data-bs-dismiss="alert" aria-label="Close"></button>
+        {% for field, errors in form.errors.items() %}
+        <div class="">{{ form[field].name|title}}: {{ ', '.join(errors) }}</div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
