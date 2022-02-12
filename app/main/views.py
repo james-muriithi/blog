@@ -11,7 +11,15 @@ def index():
     subscribe_form = SubscriberForm()
     quote = get_quote()
     blogs = Blog.get_all_blogs()
-    return render_template('index.html', blogs=blogs, subscribe_form=subscribe_form, quote=quote)
+
+    categories_bg = [
+        "https://res.cloudinary.com/james-m/image/upload/c_scale,w_455,f_webp/v1644698836/pexels-ella-olsson-1640777_qauhrg.jpg",
+        "https://res.cloudinary.com/james-m/image/upload/c_scale,w_455,f_webp/v1644698835/pexels-josh-sorenson-1714208_p9ajro.jpg",
+        "https://res.cloudinary.com/james-m/image/upload/c_scale,w_455,f_webp/v1644698837/pexels-errin-casano-2356045_a8tnjn.jpg",
+        "https://res.cloudinary.com/james-m/image/upload/c_scale,w_455,f_webp/v1644698837/pexels-freestocksorg-96380_cigxpx.jpg"
+    ]
+
+    return render_template('index.html', blogs=blogs, subscribe_form=subscribe_form, quote=quote, categories_bg=categories_bg)
 
 
 @main.route('/blog/<id>')

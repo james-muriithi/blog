@@ -34,7 +34,9 @@
     <div class="row">
         {% for category in categories[:4] %}
         <div class="col-sm-6 mb-3">
-           {% include 'partials/category-card.html' %}
+            {% with index = loop.index -1 %}
+                {% include 'partials/category-card.html' %}
+            {% endwith %}
         </div>
         {% endfor %}
     </div>

@@ -1,6 +1,7 @@
 <a href="#" class="">
     <div class="category-card position-relative">
-        <img src="{{url_for('static', filename='images/banner-image.png')}}" alt="" class="img-fluid category-image">
+        <!--<img src="{{url_for('static', filename='images/banner-image.png')}}" alt="" class="img-fluid category-image">-->
+        <img src="{{categories_bg[index]}}" alt="" class="img-fluid category-image">
         <div class="overlay position-absolute end-0 start-0 bottom-0 top-0 d-flex align-items-center">
             <div class="px-3 text-white w-100">
                 <h2 class="fw-bold text-center">{{category.name}}</h2>
