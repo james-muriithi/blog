@@ -9,6 +9,7 @@
             <div class="login-card px-4 py-5 text-white">
                 <h2 class="fw-bold text-center fs-5">Signup</h2>
                 <div class="pt-5">
+                    {% include 'partials/form-errors.html' %}
                     <form action="" class="" method="post">
                         {{form.csrf_token}}
                         <div class="form-group">

@@ -4,8 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_mail import Mail
+from flask_toastr import Toastr
 
-
+toastr = Toastr()
 mail = Mail()
 bootstrap = Bootstrap()
 db = SQLAlchemy()
@@ -31,6 +32,7 @@ def create_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
+    toastr.init_app(app)
 
 
     # Will add the views and forms

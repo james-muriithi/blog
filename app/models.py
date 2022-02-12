@@ -27,6 +27,10 @@ class User(UserMixin, db.Model):
         return self.name.split()[0]
 
     @property
+    def is_admin(self):
+        return self.role_id == 1    
+
+    @property
     def password(self):
         raise AttributeError('You cannot read the password attribute')
 

@@ -16,7 +16,7 @@ def index():
             login_user(user,form.remember.data)
             return redirect(request.args.get('next') or url_for('main.index'))
 
-        flash('Invalid username or Password', 'danger')
+        flash('Invalid username or Password', 'error')
 
     return render_template('auth/login.html', form=form, title="Login")
 
@@ -33,9 +33,8 @@ def signup():
 
         flash('User Account created successfully!', 'success')
         login_user(user)
-        
-        return redirect(request.args.get('next') or url_for('main.index'))
 
+        return redirect(request.args.get('next') or url_for('main.index'))
     return render_template('auth/signup.html', form=form)
 
 
