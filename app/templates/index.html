@@ -33,7 +33,7 @@
 <section class="py-5 categories">
     <h1 class="text-center text-white pb-3">Categories</h1>
     <div class="row">
-        {% for i in range(4) %}
+        {% for category in categories[:4] %}
         <div class="col-sm-6 mb-3">
            {% include 'partials/category-card.html' %}
         </div>

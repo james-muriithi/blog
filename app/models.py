@@ -83,7 +83,7 @@ class Blog(db.Model):
 
     @classmethod
     def get_all_blogs(cls):
-        return cls.query.all()
+        return cls.query.order_by(cls.created_at.desc()).all()
 
     def __repr__(self):
         return f'Post {self.title}'
