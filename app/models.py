@@ -1,8 +1,10 @@
 from datetime import datetime
-from email.policy import default
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from . import login_manager,db
+import os
+from flask import url_for
+
 
 class User(UserMixin, db.Model):
     '''
@@ -25,6 +27,13 @@ class User(UserMixin, db.Model):
     @property
     def first_name(self):
         return self.name.split()[0]
+
+    @property
+    def avatar_image(self):
+        current_dir = os.path.dirname(os.path.realpath(__file__))
+        if self.avatar and os.path.isfile(current_dir + url_for('static', filename=self.avatar)):
+            return url_for('static', filename=self.avatar)
+        return f"https://ui-avatars.com/api/?name={self.name.replace(' ',  '+')}"    
 
     @property
     def is_admin(self):
@@ -66,6 +75,15 @@ class Blog(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     comments = db.relationship('Comment', backref='post', lazy='dynamic')
+
+    @property
+    def formatted_time(self):
+        from datetime import datetime
+        return self.created_at.strftime("%b %d, %Y")
+
+    @classmethod
+    def get_all_blogs(cls):
+        return cls.query.all()
 
     def __repr__(self):
         return f'Post {self.title}'

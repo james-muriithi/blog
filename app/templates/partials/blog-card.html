@@ -1,24 +1,28 @@
 <div class="blog-card">
-    <img src="{{url_for('static', filename='images/banner-image.png')}}" alt="" class="img-fluid news-image w-100">
+    <img src="{{url_for('static', filename=blog.image_path)}}" alt="" class="img-fluid news-image w-100">
     <div class="details  pt-3">
         <p class="text-muted mb-1">
-            Technology . <span class="ps-3">Jun 28,2021</span>
+            {{blog.category.name}}<span class="px-2">.</span>{{blog.formatted_time}}
         </p>
         <a href="./single-blog.html" class="">
             <h5 class="fw-bold text-white">
-                How to design a product that can grow itself 10x in year
+                {{blog.title}}
             </h5>
         </a>
-        <p class="text-muted">
-            Auctor Porta. Augue vitae diam mauris faucibus blandit elit per, feugiat leo dui orci.
-            Etiam vestibulum. Nostra netus per conubia dolor.
-        </p>
+        <div class="text-muted content">
+            {{blog.content | truncate(150) | safe }}
+        </div>
         <div class="d-flex">
-            <img src="{{url_for('static', filename='images/banner-image.png')}}" height="30" width="30" alt="" class="avatar rounded-circle">
+            <img src="{{blog.user.avatar_image}}" height="30" width="30" alt="" class="avatar rounded-circle">
             <div class="ps-3">
-                <p class="text-white mb-1">Jane Doe</p>
+                <p class="text-white mb-1">{{blog.user.name}}</p>
                 <span class="text-muted"></span>
             </div>
         </div>
     </div>
 </div>
+<style>
+    .blog-card content * {
+        color: #6c757d !important;
+    }
+</style>

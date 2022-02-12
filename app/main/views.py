@@ -7,8 +7,8 @@ from . import main
 
 @main.route('/')
 def index():
-    
-    return render_template('index.html')
+    blogs = Blog.get_all_blogs()
+    return render_template('index.html', blogs=blogs)
 
 
 @main.route('/blog/create', methods=['POST'])
