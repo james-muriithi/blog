@@ -1,14 +1,16 @@
-from app.main.forms import BlogForm
-from app.models import Blog, Category
+from unicodedata import name
+from app.main.forms import BlogForm, SubscriberForm
+from app.models import Blog, Subscriber
 from app import db, photos
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 from . import main
 
 @main.route('/')
 def index():
+    subscribe_form = SubscriberForm()
     blogs = Blog.get_all_blogs()
-    return render_template('index.html', blogs=blogs)
+    return render_template('index.html', blogs=blogs, subscribe_form=subscribe_form)
 
 
 @main.route('/blog/create', methods=['POST'])
@@ -25,5 +27,20 @@ def pitch_create():
 
         db.session.add(blog)
         db.session.commit()
+
+    return redirect(request.referrer or url_for('main.index'))   
+
+@main.route('/subscribe', methods=["POST"])
+def subscribe():
+    subscribe_form = SubscriberForm()
+
+    if subscribe_form.validate_on_submit():
+        subscriber = Subscriber(name=subscribe_form.name.data, email=subscribe_form.email.data)
+        db.session.add(subscriber)
+        db.session.commit()
+        flash("You have added to our list of subscribers")
+
+        # send email
+
 
     return redirect(request.referrer or url_for('main.index'))   
