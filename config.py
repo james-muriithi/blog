@@ -13,6 +13,13 @@ class Config:
 
     SECRET_KEY = config('SECRET_KEY', default="")
 
+    #  email configurations
+    MAIL_SERVER = 'smtp.googlemail.com'
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USERNAME = config("MAIL_USERNAME", default="")
+    MAIL_PASSWORD = config("MAIL_PASSWORD", default="")
+
 
 
 class ProdConfig(Config):
