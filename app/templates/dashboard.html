@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ <!-- section latest pitches -->
+ <section class="py-5 px-1 px-lg-3">
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-12 mb-3">
+                        <div class="card h-100 bg-transparent border-0">
+                            <div class="card-body">
+                                <h2 class="fw-bold fs-3 text-center text-secondary text-white">Signed Up Users</h2>
+                                <div class="table-responsive">
+                                    <table class="table table-responsive mt-3 text-white border-white bg-transparent">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Username</th>
+                                                <th scope="col">Email </th>
+                                                <th scope="col">Posts</th>
+                                                <th scope="col">Role</th>
+                                                <th scope="col">Created At</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if users | length > 0 %}
+                                            {% for user in users %}
+                                            <tr>
+                                                <td>
+                                                    {{loop.index}}
+                                                </td>
+                                                <td>
+                                                    {{user.name}}
+                                                </td>
+                                                <td>
+                                                    {{user.username}}
+                                                </td>
+                                                <td>{{user.email}}</td>
+                                                <td>{{user.blogs.count()}}</td>
+                                                <td>{{user.role}}</td>
+                                                <td>{{user.created_at.strftime("%b %d, %Y %H:%m")}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                            {% else %}
+                                            <tr>
+                                                <td colspan="7" class="text-center">
+                                                    No users yet
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end latest pitches -->
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+
+{% endblock %}

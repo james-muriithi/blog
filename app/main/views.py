@@ -171,5 +171,13 @@ def category_show(id):
     subscribe_form = SubscriberForm()
     if not category:
         abort(404)
-    blogs = category.blogs[:5]
-    return render_template('category.html', category=category, blogs = blogs, subscribe_form=subscribe_form, title=category.name)   
+    blogs = category.blogs.order_by(Blog.created_at.desc()).all()[:5]
+    return render_template('category.html', category=category, blogs = blogs, subscribe_form=subscribe_form, title=category.name)  
+
+@main.route('/dashboard', methods=["GET"])
+@login_required
+def dashboard():
+    if not current_user.is_admin:
+        abort(403)
+    users = User.query.order_by(User.created_at.desc()).limit(100).all()
+    return render_template('dashboard.html', users=users)    
