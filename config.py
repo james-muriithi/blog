@@ -7,8 +7,6 @@ class Config:
     """
 
     UPLOADED_PHOTOS_DEST ='app/static/uploads'
-    
-    SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@localhost/{DB}'
 
     SECRET_KEY = config('SECRET_KEY', default="")
 
