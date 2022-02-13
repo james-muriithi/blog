@@ -1,5 +1,5 @@
 # Epic Blog
-
+Created by James Muriithi on 12-02-2022
 ## Description
 A web application where users you can create and share their opinions and people can read and comment on them.
 # Setup / Installation
@@ -54,8 +54,11 @@ The following languages have been used on this project:
 ## Live Link
 [Click Here](https://epic-blogs.herokuapp.com/)
 
-## Screenshot
+## Design
+[Here is the figma design of the app](https://www.figma.com/file/fxVWP4Fm5LfR1zCksAzZzN/Untitled?node-id=2%3A5)
 
+## Screenshot
+![Screenshot](./screenshots/screenshot.png)
 
 ## MIT licence
 
