@@ -29,7 +29,7 @@ def seed():
     ]
 
     db.session.add_all(roles)
-    # db.session.add_all(categories)
+    db.session.add_all(categories)
     db.session.commit()
 
 @app.context_processor
