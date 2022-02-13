@@ -1,5 +1,5 @@
 from app.main.forms import BlogForm, CommentForm, ProfileForm, SubscriberForm, EditBlogForm
-from app.models import Blog, Subscriber, Comment, User
+from app.models import Blog, Category, Subscriber, Comment, User
 from app import db, photos
 from app.requests import get_quote
 from flask import render_template, redirect, url_for, request, flash, abort
@@ -163,4 +163,13 @@ def update_avatar():
         current_user.avatar = path
         db.session.commit()
 
-    return redirect(url_for('main.profile'))    
+    return redirect(url_for('main.profile'))   
+
+@main.route('/category/<id>',methods= ['GET'])
+def category_show(id):
+    category = Category.query.get(id)
+    subscribe_form = SubscriberForm()
+    if not category:
+        abort(404)
+    blogs = category.blogs[:5]
+    return render_template('category.html', category=category, blogs = blogs, subscribe_form=subscribe_form, title=category.name)   

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- blogs -->
+<section id="blogs" class="py-5 blogs-section">
+    <h1 class="pt-5 mt-5 fw-bold text-white">
+        {{category.name}}
+    </h1>
+    <div class="row pt-5">
+        {% for blog in blogs %}
+        <div class="col-sm-4 mb-3">
+           {% include 'partials/blog-card.html' %}
+        </div>
+        {% endfor %}
+        {% if blogs | length == 0 %}
+        <p class="text-muted">Category does not have blogs</p>
+        {% endif %}
+    </div>
+</section>
+<!-- end blogs -->
+<!-- newsletter -->
+{% include 'partials/newsletter.html' %}
+<!-- end newsletter -->
+{% include "partials/subscribe-modal.html" %}
+{% endblock %}
