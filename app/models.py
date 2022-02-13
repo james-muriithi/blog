@@ -18,7 +18,7 @@ class User(UserMixin, db.Model):
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
     password_hash = db.Column(db.String(255))
     about = db.Column(db.Text)
-    avatar = db.Column(db.String(64))
+    image_url = db.Column(db.String(255))
 
     blogs = db.relationship('Blog', backref="user", lazy="dynamic")
     comments = db.relationship('Comment', backref="user", lazy="dynamic")
@@ -31,9 +31,9 @@ class User(UserMixin, db.Model):
 
     @property
     def avatar_image(self):
-        current_dir = os.path.dirname(os.path.realpath(__file__))
-        if self.avatar and os.path.isfile(current_dir + url_for('static', filename=self.avatar)):
-            return url_for('static', filename=self.avatar)
+        # current_dir = os.path.dirname(os.path.realpath(__file__))
+        if self.image_url:
+            return self.image_url
         return f"https://ui-avatars.com/api/?name={self.name.replace(' ',  '+')}"    
 
     @property

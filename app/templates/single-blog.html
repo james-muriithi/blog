@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="mt-4">
-        <img src="{{url_for('static', filename=blog.image_path)}}" alt="" class="img-fluid w-100">
+        <img src="{{blog.image_path}}" alt="" class="img-fluid w-100">
     </div>
     <div class="description pt-5 fs-5 content">
         {{blog.content | safe }}

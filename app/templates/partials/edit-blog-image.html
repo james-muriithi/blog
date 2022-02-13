@@ -12,7 +12,7 @@
                     <form action="{{url_for('main.blog_update_image', id=blog.id)}}" method="POST" id="image-form-{{blog.id}}"
                         enctype="multipart/form-data">
                         {{ blog_form.csrf_token }}
-                        <img src="{{url_for('static', filename=blog.image_path)}}" class="img-fluid mt-4" height="50"
+                        <img src="{{blog.image_path}}" class="img-fluid mt-4" height="50"
                             width="50" alt="">
                         <div class="form-group">
                             <label for="" class="form-label text-sm">Image</label>

@@ -1,7 +1,7 @@
 # Epic Blog
 
 ## Description
-
+A web application where users you can create and share their opinions and people can read and comment on them.
 # Setup / Installation
 * clone the repo:
 
@@ -49,9 +49,10 @@ The following languages have been used on this project:
 * Bootstrap
 * Flask
 * Python
+* Cloudinary (for image upload)
 
 ## Live Link
-[Click Here]( )
+[Click Here](https://epic-blogs.herokuapp.com/)
 
 ## Screenshot
 

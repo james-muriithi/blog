@@ -6,6 +6,9 @@ from app.requests import get_quote
 from flask import render_template, redirect, url_for, request, flash, abort
 from flask_login import login_required, current_user
 from . import main
+# import cloudinary
+from cloudinary.uploader import upload
+from cloudinary.utils import cloudinary_url
 
 @main.route('/')
 def index():
@@ -37,8 +40,8 @@ def blog_create():
     form = BlogForm()
 
     if form.validate_on_submit() and 'image_path' in request.files:
-        filename = photos.save(request.files['image_path'])
-        path = f'uploads/{filename}'
+        # filename = photos.save(request.files['image_path'])
+        path = upload(request.files['image_path'])['url']
 
         blog = Blog(title=form.title.data, content=form.content.data,
                       user=current_user, category_id=form.category.data, image_path=path)
@@ -79,8 +82,9 @@ def blog_update_image(id):
         abort(404)
 
     if 'image_path' in request.files:
-        filename = photos.save(request.files['image_path'])
-        path = f'uploads/{filename}'
+        # filename = photos.save(request.files['image_path'])
+        # path = f'uploads/{filename}'
+        path = upload(request.files['image_path'])['url']
 
         Blog.query.filter_by(id=id).update({"image_path": path})
         db.session.commit()
@@ -166,9 +170,10 @@ def profile():
 @login_required
 def update_avatar():
     if 'avatar' in request.files:
-        filename = photos.save(request.files['avatar'])
-        path = f'uploads/{filename}'
-        current_user.avatar = path
+        # filename = photos.save(request.files['avatar'])
+        # path = f'uploads/{filename}'
+        path = upload(request.files['avatar'])['url']
+        current_user.image_url = path
         db.session.commit()
 
     return redirect(url_for('main.profile'))   
@@ -189,10 +194,3 @@ def dashboard():
         abort(403)
     users = User.query.order_by(User.created_at.desc()).limit(100).all()
     return render_template('dashboard.html', users=users)
-
-@main.route('/email')
-def email():
-    # send email
-    blogs = Blog.query.order_by(Blog.created_at.desc()).limit(3).all()
-    mail_message("Top Stories For You", "emails/newsletter", "muriithijames556@gmail.com",blogs=blogs)
-    return 'hey'

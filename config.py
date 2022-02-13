@@ -1,5 +1,6 @@
 import os
 from decouple import config
+import cloudinary
 
 class Config:
     """
@@ -16,6 +17,13 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = config("MAIL_USERNAME", default="")
     MAIL_PASSWORD = config("MAIL_PASSWORD", default="")
+
+    # cloudinary config
+    cloudinary.config(
+        cloud_name=config('CLOUD_NAME', default=""),
+        api_key=config('API_KEY', default=""),
+        api_secret=config('API_SECRET', default="")
+    )
 
 
 

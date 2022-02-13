@@ -16,8 +16,8 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
+                                                <th scope="col">Image</th>
                                                 <th scope="col">Name</th>
-                                                <th scope="col">Username</th>
                                                 <th scope="col">Email </th>
                                                 <th scope="col">Posts</th>
                                                 <th scope="col">Role</th>
@@ -32,10 +32,10 @@
                                                     {{loop.index}}
                                                 </td>
                                                 <td>
-                                                    {{user.name}}
+                                                    <img src="{{user.avatar_image}}" alt="{{user.name}}" height="30" width="30" class="avatar rounded-circle">
                                                 </td>
                                                 <td>
-                                                    {{user.username}}
+                                                    {{user.name}}
                                                 </td>
                                                 <td>{{user.email}}</td>
                                                 <td>{{user.blogs.count()}}</td>
