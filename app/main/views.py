@@ -1,3 +1,4 @@
+from app.email import mail_message
 from app.main.forms import BlogForm, CommentForm, ProfileForm, SubscriberForm, EditBlogForm
 from app.models import Blog, Category, Subscriber, Comment, User
 from app import db, photos
@@ -44,6 +45,12 @@ def blog_create():
 
         db.session.add(blog)
         db.session.commit()
+
+        blogs = Blog.query.order_by(Blog.created_at.desc()).limit(3).all()
+
+        # send emails
+        for subscriber in Subscriber.get_subscribers():
+            mail_message("Top Stories For You", "emails/newsletter", subscriber.email,blogs=blogs)
 
     return redirect(request.referrer or url_for('main.index'))  
 
@@ -93,7 +100,8 @@ def subscribe():
         flash("You have added to our list of subscribers", "success")
 
         # send email
-
+        blogs = Blog.query.order_by(Blog.created_at.desc()).limit(3).all()
+        mail_message("Top Stories For You", "emails/newsletter", subscriber.email,blogs=blogs)
 
     return redirect(request.referrer or url_for('main.index'))   
 
@@ -180,4 +188,11 @@ def dashboard():
     if not current_user.is_admin:
         abort(403)
     users = User.query.order_by(User.created_at.desc()).limit(100).all()
-    return render_template('dashboard.html', users=users)    
+    return render_template('dashboard.html', users=users)
+
+@main.route('/email')
+def email():
+    # send email
+    blogs = Blog.query.order_by(Blog.created_at.desc()).limit(3).all()
+    mail_message("Top Stories For You", "emails/newsletter", "muriithijames556@gmail.com",blogs=blogs)
+    return 'hey'
