@@ -166,7 +166,7 @@
                 <div class="col-sm-12 mb-3">
                     <div class="card h-100 shadow">
                         <div class="card-body text-white">
-                            <h2 class="fw-bold fs-3 text-center">Your Posted Blogs</h2>
+                            <h2 class="fw-bold fs-3 text-center">Comments to your Blogs</h2>
                             <div class="table-responsive">
                                 <table class="table table-responsive mt-3 text-white border-white bg-transparent">
                                     <thead>
@@ -196,7 +196,13 @@
                                             <td>
                                                 {{comment.comment}}
                                             </td>
-                                            <td class="">{{comment.user.name}}</td>
+                                            <td class="">
+                                                {% if current_user.id == comment.user_id %}
+                                                    Me
+                                                {% else %}
+                                                    {{comment.user.name}}
+                                                {% endif %}
+                                            </td>
                                             <td>{{comment.formatted_time}}</td>
                                             <td>
                                                 <div>
@@ -213,7 +219,69 @@
                                         {% else %}
                                         <tr>
                                             <td colspan="7" class="text-center">
-                                                You have no commentt yet
+                                                You blogs have no comments yet
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                        {% endwith %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 mb-3">
+                    <div class="card h-100 shadow">
+                        <div class="card-body text-white">
+                            <h2 class="fw-bold fs-3 text-center">Your Posted Comments</h2>
+                            <div class="table-responsive">
+                                <table class="table table-responsive mt-3 text-white border-white bg-transparent">
+                                    <thead>
+                                        <tr class="">
+                                            <th scope="col">#</th>
+                                            <th scope="col">Comment</th>
+                                            <th scope="col">Post</th>
+                                            <th scope="col">Created At</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% with comments = current_user.comments %}
+                                        {% if comments.count() > 0 %}
+                                        {% for comment in comments.all() %}
+                                        <tr>
+                                            <td>
+                                                {{loop.index}}
+                                            </td>
+                                            <td>
+                                                {{comment.comment}}
+                                            </td>
+                                            <td>
+                                                <a href="{{url_for('main.blog_show', id=comment.blog.id)}}"
+                                                    class="fw-bold text-white text-decoration-underline">
+                                                    {{comment.blog.title | truncate(120)}}
+                                                </a>
+                                            </td>
+                                            <td>{{comment.formatted_time}}</td>
+                                            <td>
+                                                <div>
+                                                    <a href="{{url_for('main.delete_comment', id=comment.id)}}"
+                                                        class="btn btn-sm">
+                                                        <span class="material-icons text-danger">
+                                                            delete
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        {% else %}
+                                        <tr>
+                                            <td colspan="7" class="text-center">
+                                                You have not posted any comments yet
                                             </td>
                                         </tr>
                                         {% endif %}
