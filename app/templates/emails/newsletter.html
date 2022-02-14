@@ -381,9 +381,9 @@
 
                               <div style="color: #303030; line-height: 180%; text-align: left; word-wrap: break-word;">
                                 <p style="font-size: 14px; line-height: 180%;">{{blog.content | safe | truncate(150)}}</p>
-                                <p style="font-size: 14px; line-height: 180%;"><strong><span
+                                <a href="{{url_for('main.blog_show', id=blog.id, _external=True)}}" target="_blank" style="font-size: 14px; line-height: 180%;"><strong><span
                                       style="text-decoration: underline; font-size: 14px; line-height: 25.2px; color: #000000;">READ
-                                      MORE&gt;&gt;</span></strong></p>
+                                      MORE&gt;&gt;</span></strong></a>
                               </div>
 
                             </td>
