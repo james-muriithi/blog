@@ -12,7 +12,7 @@ class TestComment(unittest.TestCase):
         Method that will run before every test
         """
         self.new_comment = Comment(
-            content="This is a comment")
+            comment="This is a comment")
 
     def test_instance(self):
         """

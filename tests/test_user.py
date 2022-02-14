@@ -23,3 +23,6 @@ class TestUser(unittest.TestCase):
         """
         with self.assertRaises(AttributeError):
             self.new_user.password
+
+    def test_first_name(self):
+        self.assertEquals(self.new_user.first_name, self.new_user.name.split()[0])        

@@ -32,6 +32,13 @@ def seed():
     db.session.add_all(categories)
     db.session.commit()
 
+@manager.command
+def test():
+    """Run the unit tests."""
+    import unittest
+    tests = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner(verbosity=2).run(tests)      
+
 @app.context_processor
 def inject_user():
     blog_form = BlogForm()
