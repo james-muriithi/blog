@@ -25,7 +25,7 @@ def index():
 def signup():
     form = SignupForm()
     if form.validate_on_submit():
-        user = User(email=form.email.data, password=form.password.data, name=form.name.data, role_id=1)
+        user = User(email=form.email.data, password=form.password.data, name=form.name.data, role_id=2)
         user.save_user()
 
         # send email to user
